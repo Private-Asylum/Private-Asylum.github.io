@@ -1,3 +1,4 @@
 [submodule "pvas-web-shared"]
-	path = pvas-web-shared
+	path = Crates/pvas-web-shared
 	url = https://github.com/Private-Asylum/pvas-web-shared.git
+	branch = main

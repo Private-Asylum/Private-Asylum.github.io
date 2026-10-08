@@ -27,13 +27,13 @@ Everything shared lives in
 [pvas-web-shared](https://github.com/Private-Asylum/pvas-web-shared): the
 components (document, nav, footer), the embedded Yeti build, writing the site
 and the `build`/`serve` command line. **It is developed here**, as the
-`pvas-web-shared/` submodule, which Cargo uses by path, so an edit there is
+`Crates/pvas-web-shared/` submodule, which Cargo uses by path, so an edit there is
 live in this site's next build. It is its own workspace (excluded from this
 one) with its own lints, lockfile and CI.
 
 Changing it:
 
-1. Edit and test inside `pvas-web-shared/` (`cargo clippy`, `cargo test` there).
+1. Edit and test inside `Crates/pvas-web-shared/` (`cargo clippy`, `cargo test` there).
 2. Commit and push in the submodule. It fetches over HTTPS and pushes over SSH.
 3. Commit the moved submodule pointer here. That pointer is the pin CI builds
    from (`submodules: true` on checkout).
