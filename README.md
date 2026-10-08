@@ -20,12 +20,13 @@ repositories, so they 404 locally.
 ```
 Crates/site/       pvas-site    this site's pages and content
 Crates/render/     pvas-render  the binary: renders every page, hands the site to pvas-web-site
-styles/            theme.css (Yeti tokens), site.css (this site's own rules)
+styles/            theme.css: this site's hues
 ```
 
 Everything shared lives in
 [pvas-web-shared](https://github.com/Private-Asylum/pvas-web-shared): the
-components (document, nav, footer), the embedded Yeti build, writing the site
+components (document, nav, footer, intro, card), the embedded Yeti build and
+the house style every Private Asylum site shares, writing the site
 and the `build`/`serve` command line. **It is developed here**, as the
 `Crates/pvas-web-shared/` submodule, which Cargo uses by path, so an edit there is
 live in this site's next build. It is its own workspace (excluded from this
@@ -54,10 +55,12 @@ that breaks the policy deploys. Exceptions in code use `#[expect(..., reason
 
 ## Styling
 
-Yeti comes embedded from pvas-web-shared, which records the Yeti commit it was
-built from. Style through Yeti's tokens in `styles/theme.css` first;
-`styles/site.css` is unlayered, so it wins over Yeti's cascade layers without
-specificity fights.
+The look is the house style from pvas-web-shared: Yeti, then the shared house
+stylesheet (Geist Mono, the dark terminal screen, the `pa-` classes), which
+`Site::with_house()` ships and `HOUSE_STYLESHEETS` links on every page. Every
+Private Asylum site shares it, so this site sets only its hues, in
+`styles/theme.css`: violet is its phosphor. A change to the look belongs in
+pvas-web-shared, where it reaches every site at once.
 
 ## Hosting
 

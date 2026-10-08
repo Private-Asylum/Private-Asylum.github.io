@@ -1,9 +1,0 @@
-/* Rules for this site's own pieces. Unlayered on purpose: anything outside
-   Yeti's cascade layers wins over them without a specificity fight. Change
-   Yeti's components through their tokens in theme.css, never here by class. */
-
-/* A plugin that is announced but not released. */
-.pa-pending {
-	color: var(--yeti-color-text-muted);
-	font-style: italic;
-}

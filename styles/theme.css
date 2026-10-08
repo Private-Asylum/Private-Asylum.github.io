@@ -1,19 +1,18 @@
-/* Private Asylum's Yeti theme: token values only, loaded after yeti.css.
-   Every value Yeti offers is listed, with its default, in pvas-web-shared at
-   Crates/assets/vendor/yeti/starter/theme.css; this file sets only the ones
-   that differ. */
+/* Private Asylum's theme: its hues, and nothing else. The type, the screen
+   and the shape are the house style's (pvas-web-shared, Crates/assets/house/
+   house.css), loaded before this file, so every Private Asylum site looks of
+   a piece and differs only in its phosphor. Every Yeti token, with its
+   default, is listed in pvas-web-shared at Crates/assets/vendor/yeti/starter/
+   theme.css. */
 
 /* Repeats Yeti's layer order, so element rules land in the right place even
    if this file loads before yeti.css. */
 @layer yeti.reset, yeti.base, yeti.theme, yeti.layouts, yeti.components, yeti.utilities;
 
 :root {
-	/* Color. Every color in Yeti is worked out from these. A violet brand hue,
-	   with amber as the second accent. */
+	/* A violet phosphor, with amber as the second accent. The greys follow
+	   the violet. */
 	--yeti-hue-primary: 295;
 	--yeti-hue-secondary: 75;
 	--yeti-chroma: 0.14;
-
-	/* Headings a touch tighter than body text. */
-	--yeti-tracking-heading: -0.02em;
 }

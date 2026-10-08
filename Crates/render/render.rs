@@ -18,10 +18,11 @@ fn workspace_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
 
-/// Everything the site publishes: its pages, Yeti, its own stylesheets and its `CNAME`.
+/// Everything the site publishes: its pages, the house (Yeti and the house style), its own
+/// stylesheets and its `CNAME`.
 fn build() -> io::Result<Site> {
     let root = workspace_root();
-    let mut site = Site::new().with_yeti();
+    let mut site = Site::new().with_house();
 
     for page in pvas_site::pages() {
         let html = render_document(&page.meta, (page.body)());

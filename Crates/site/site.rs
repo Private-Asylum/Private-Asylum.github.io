@@ -7,7 +7,7 @@
 
 use dioxus::prelude::*;
 
-use pvas_web_shared::assets::YETI_STYLESHEET;
+use pvas_web_shared::assets::HOUSE_STYLESHEETS;
 use pvas_web_shared::components::PageMeta;
 
 #[path = "chrome/chrome.rs"]
@@ -38,13 +38,15 @@ pub struct Page {
     pub body: fn() -> Element,
 }
 
-/// Stylesheets every page loads, in order: Yeti, then the theme's tokens, then the site's rules.
+/// Stylesheets every page loads, in order: the house (Yeti, then the house style), then the
+/// site's theme, which sets its hues.
 fn stylesheets() -> Vec<String> {
-    vec![
-        format!("/{YETI_STYLESHEET}"),
-        "/css/theme.css".to_owned(),
-        "/css/site.css".to_owned(),
-    ]
+    let mut sheets: Vec<String> = HOUSE_STYLESHEETS
+        .iter()
+        .map(|sheet| format!("/{sheet}"))
+        .collect();
+    sheets.push("/css/theme.css".to_owned());
+    sheets
 }
 
 /// Head metadata for a page: its title with the site name, and its canonical URL when it has
