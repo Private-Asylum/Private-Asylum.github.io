@@ -629,12 +629,10 @@ dependencies = [
 [[package]]
 name = "pvas-web-assets"
 version = "0.1.0"
-source = "git+https://github.com/Private-Asylum/pvas-web-shared?rev=0b15e2e59e5f265ddf156e96fb589df881ddfba6#0b15e2e59e5f265ddf156e96fb589df881ddfba6"
 
 [[package]]
 name = "pvas-web-components"
 version = "0.1.0"
-source = "git+https://github.com/Private-Asylum/pvas-web-shared?rev=0b15e2e59e5f265ddf156e96fb589df881ddfba6#0b15e2e59e5f265ddf156e96fb589df881ddfba6"
 dependencies = [
  "dioxus",
  "dioxus-ssr",
@@ -643,7 +641,6 @@ dependencies = [
 [[package]]
 name = "pvas-web-docs"
 version = "0.1.0"
-source = "git+https://github.com/Private-Asylum/pvas-web-shared?rev=0b15e2e59e5f265ddf156e96fb589df881ddfba6#0b15e2e59e5f265ddf156e96fb589df881ddfba6"
 dependencies = [
  "serde",
  "serde_json",
@@ -652,7 +649,6 @@ dependencies = [
 [[package]]
 name = "pvas-web-shared"
 version = "0.1.0"
-source = "git+https://github.com/Private-Asylum/pvas-web-shared?rev=0b15e2e59e5f265ddf156e96fb589df881ddfba6#0b15e2e59e5f265ddf156e96fb589df881ddfba6"
 dependencies = [
  "pvas-web-assets",
  "pvas-web-components",
@@ -663,7 +659,6 @@ dependencies = [
 [[package]]
 name = "pvas-web-site"
 version = "0.1.0"
-source = "git+https://github.com/Private-Asylum/pvas-web-shared?rev=0b15e2e59e5f265ddf156e96fb589df881ddfba6#0b15e2e59e5f265ddf156e96fb589df881ddfba6"
 dependencies = [
  "pvas-web-assets",
  "tiny_http",

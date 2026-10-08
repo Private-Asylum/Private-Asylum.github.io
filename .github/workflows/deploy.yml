@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          submodules: true   # pvas-web-shared is built from the pinned submodule commit
       - run: rustup toolchain install   # reads rust-toolchain.toml
       - uses: Swatinem/rust-cache@v2
       # The lint policy lives in Cargo.toml ([workspace.lints]); nothing deploys that breaks it.

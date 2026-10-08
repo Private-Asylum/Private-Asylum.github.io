@@ -1,5 +1,7 @@
 [workspace]
 resolver = "3"
+# The pvas-web-shared submodule is its own workspace, with its own lints, lockfile and CI.
+exclude = ["pvas-web-shared"]
 members = [
     # privateasylum.com itself: its pages and their content.
     "Crates/site",
@@ -19,8 +21,9 @@ publish = false
 pvas-site = { path = "Crates/site" }
 
 # Everything Private Asylum's sites share: components, the Yeti build, writing and serving a site.
-# Pinned to a commit; a change there reaches this site only when this pin moves.
-pvas-web-shared = { git = "https://github.com/Private-Asylum/pvas-web-shared", rev = "0b15e2e59e5f265ddf156e96fb589df881ddfba6" }
+# Developed here, in the pvas-web-shared submodule; the submodule's commit is the pin, so a
+# change there reaches this site when the submodule pointer moves. Other sites pin it by git rev.
+pvas-web-shared = { path = "pvas-web-shared/Crates/pvas-web-shared" }
 
 # Dioxus as a renderer only, for this site's own pages. Must stay on the same line as
 # pvas-web-shared's, or the two would build different `Element` types.

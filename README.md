@@ -6,6 +6,7 @@ hydration), styled by [Yeti](https://github.com/foundation/yeti) and plain
 modern CSS.
 
 ```bash
+git clone --recurse-submodules git@github.com:Private-Asylum/Private-Asylum.github.io.git
 cargo run -p pvas-render --release              # renders into public/
 cargo run -p pvas-render --release -- serve     # renders, then previews at http://127.0.0.1:8080/
 ```
@@ -25,8 +26,19 @@ styles/            theme.css (Yeti tokens), site.css (this site's own rules)
 Everything shared lives in
 [pvas-web-shared](https://github.com/Private-Asylum/pvas-web-shared): the
 components (document, nav, footer), the embedded Yeti build, writing the site
-and the `build`/`serve` command line. It is pinned by commit in `Cargo.toml`;
-moving the pin is how a change there reaches this site.
+and the `build`/`serve` command line. **It is developed here**, as the
+`pvas-web-shared/` submodule, which Cargo uses by path, so an edit there is
+live in this site's next build. It is its own workspace (excluded from this
+one) with its own lints, lockfile and CI.
+
+Changing it:
+
+1. Edit and test inside `pvas-web-shared/` (`cargo clippy`, `cargo test` there).
+2. Commit and push in the submodule. It fetches over HTTPS and pushes over SSH.
+3. Commit the moved submodule pointer here. That pointer is the pin CI builds
+   from (`submodules: true` on checkout).
+
+Other sites (the product docs) depend on it by git `rev` instead.
 
 Adding a page: a module under `Crates/site/`, listed in `pages()` in
 `site.rs`. Crates follow the house layout: no `src/`, the crate root beside
