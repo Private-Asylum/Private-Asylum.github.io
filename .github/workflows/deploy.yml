@@ -1,0 +1,47 @@
+name: Deploy site to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# The whole site is built here: the render binary turns the Dioxus pages into
+# static HTML and assembles public/ with the vendored Yeti build. No Node, no
+# WASM. The toolchain comes from rust-toolchain.toml.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: rustup toolchain install   # reads rust-toolchain.toml
+      - uses: Swatinem/rust-cache@v2
+      # The lint policy lives in Cargo.toml ([workspace.lints]); nothing deploys that breaks it.
+      - run: cargo fmt --check
+      - run: cargo clippy --locked --workspace --all-targets -- -D warnings
+      - run: cargo doc --locked --workspace --no-deps
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - uses: actions/configure-pages@v6
+      - run: cargo run --locked --release -p pvas-render -- --out public
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

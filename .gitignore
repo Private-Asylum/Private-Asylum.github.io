@@ -1,0 +1,13 @@
+# Rust
+/target/
+
+# The rendered site. Built in CI from the crates; never committed.
+/public/
+
+# Editor / OS
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+*~

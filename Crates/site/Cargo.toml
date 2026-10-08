@@ -1,0 +1,20 @@
+[package]
+name = "pvas-site"
+description = "privateasylum.com: its pages and their content"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["rlib"]
+path = "site.rs"
+
+[dependencies]
+dioxus.workspace = true
+pvas-web.workspace = true
+
+[lints]
+workspace = true

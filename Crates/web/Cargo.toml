@@ -1,0 +1,20 @@
+[package]
+name = "pvas-web"
+description = "Shared page chrome for Private Asylum's static sites, rendered with Dioxus and styled by Yeti"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["rlib"]
+path = "web.rs"
+
+[dependencies]
+dioxus.workspace = true
+dioxus-ssr.workspace = true
+
+[lints]
+workspace = true
