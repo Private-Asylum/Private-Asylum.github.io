@@ -7,7 +7,8 @@
 
 use dioxus::prelude::*;
 
-use pvas_web::PageMeta;
+use pvas_web_shared::assets::YETI_STYLESHEET;
+use pvas_web_shared::components::PageMeta;
 
 #[path = "chrome/chrome.rs"]
 mod chrome;
@@ -39,13 +40,11 @@ pub struct Page {
 
 /// Stylesheets every page loads, in order: Yeti, then the theme's tokens, then the site's rules.
 fn stylesheets() -> Vec<String> {
-    [
-        "/vendor/yeti/yeti.min.css",
-        "/css/theme.css",
-        "/css/site.css",
+    vec![
+        format!("/{YETI_STYLESHEET}"),
+        "/css/theme.css".to_owned(),
+        "/css/site.css".to_owned(),
     ]
-    .map(String::from)
-    .to_vec()
 }
 
 /// Head metadata for a page: its title with the site name, and its canonical URL when it has

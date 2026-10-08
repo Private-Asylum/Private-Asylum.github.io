@@ -2,7 +2,7 @@
 
 use dioxus::prelude::*;
 
-use pvas_web::{Footer, Nav, NavLink};
+use pvas_web_shared::components::{Footer, Nav, NavLink};
 
 /// Wraps a page's `main` in the site's `body`: skip link, bar, the page, footer.
 pub(crate) fn page(main: Element) -> Element {

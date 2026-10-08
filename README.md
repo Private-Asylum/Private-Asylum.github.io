@@ -17,13 +17,20 @@ repositories, so they 404 locally.
 ## Layout
 
 ```
-Crates/web/        pvas-web     shared chrome: document, nav, footer (reusable by other sites)
 Crates/site/       pvas-site    this site's pages and content
-Crates/render/     pvas-render  renders every page and assembles public/
+Crates/render/     pvas-render  the binary: renders every page, hands the site to pvas-web-site
 styles/            theme.css (Yeti tokens), site.css (this site's own rules)
-vendor/yeti/       pinned Yeti build, committed (see below)
-scripts/           update-yeti.sh
 ```
+
+Everything shared lives in
+[pvas-web-shared](https://github.com/Private-Asylum/pvas-web-shared): the
+components (document, nav, footer), the embedded Yeti build, writing the site
+and the `build`/`serve` command line. It is pinned by commit in `Cargo.toml`;
+moving the pin is how a change there reaches this site.
+
+Adding a page: a module under `Crates/site/`, listed in `pages()` in
+`site.rs`. Crates follow the house layout: no `src/`, the crate root beside
+its `Cargo.toml`, and every module in `name/name.rs` wired with `#[path]`.
 
 Full strict: clippy's `all`, `pedantic`, `nursery` and `cargo` groups are
 denied workspace-wide, with a set of `restriction` lints and strict rustc and
@@ -33,26 +40,12 @@ deliberate exceptions and why). CI runs `cargo fmt --check`, clippy with
 that breaks the policy deploys. Exceptions in code use `#[expect(..., reason
 = "...")]`; `#[allow]` is itself denied.
 
-Adding a page: a module under `Crates/site/`, listed in `pages()` in
-`site.rs`. Crates follow the house layout: no `src/`, the crate root beside
-its `Cargo.toml`, and every module in `name/name.rs` wired with `#[path]`.
+## Styling
 
-## Yeti
-
-Yeti has no npm release yet and does not commit its `dist/`, so it is built
-once at a pinned commit and the output is committed:
-
-```bash
-scripts/update-yeti.sh <40-character commit sha>
-```
-
-`vendor/yeti/VENDORED` records the source commit. CI never builds Yeti. When
-`yeti-css` ships on npm, replace `vendor/yeti/` with the package. Yeti is
-FSL-1.1-MIT (free for any use but a competing product; MIT after two years).
-
-Style through Yeti's tokens in `styles/theme.css` first; the full list, with
-defaults, is in `vendor/yeti/starter/theme.css`. `styles/site.css` is
-unlayered, so it wins over Yeti's cascade layers without specificity fights.
+Yeti comes embedded from pvas-web-shared, which records the Yeti commit it was
+built from. Style through Yeti's tokens in `styles/theme.css` first;
+`styles/site.css` is unlayered, so it wins over Yeti's cascade layers without
+specificity fights.
 
 ## Hosting
 

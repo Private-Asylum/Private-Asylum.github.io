@@ -1,11 +1,9 @@
 [workspace]
 resolver = "3"
 members = [
-    # Shared page chrome: the document, nav and footer every Private Asylum site is built from.
-    "Crates/web",
     # privateasylum.com itself: its pages and their content.
     "Crates/site",
-    # Renders every page to static HTML and assembles the published folder.
+    # The site's binary: renders every page and hands them to pvas-web-site's build/serve.
     "Crates/render",
 ]
 
@@ -18,16 +16,15 @@ homepage = "https://privateasylum.com/"
 publish = false
 
 [workspace.dependencies]
-pvas-web = { path = "Crates/web" }
 pvas-site = { path = "Crates/site" }
 
-# Dioxus as a renderer only: components to HTML strings, no WASM, no hydration.
-# 0.8 is pre-release; stay on the stable 0.7 line.
-dioxus = { version = "0.7.10", default-features = false, features = ["macro", "html", "signals"] }
-dioxus-ssr = "0.7.10"
+# Everything Private Asylum's sites share: components, the Yeti build, writing and serving a site.
+# Pinned to a commit; a change there reaches this site only when this pin moves.
+pvas-web-shared = { git = "https://github.com/Private-Asylum/pvas-web-shared", rev = "0b15e2e59e5f265ddf156e96fb589df881ddfba6" }
 
-# Local preview server for `pvas-render serve`. Never part of what deploys.
-tiny_http = "0.12.0"
+# Dioxus as a renderer only, for this site's own pages. Must stay on the same line as
+# pvas-web-shared's, or the two would build different `Element` types.
+dioxus = { version = "0.7.10", default-features = false, features = ["macro", "html", "signals"] }
 
 # Full strict. Every group denied, so a lint is an error locally and in CI alike. Groups sit at
 # priority -1 so an individual lint below can override its group.

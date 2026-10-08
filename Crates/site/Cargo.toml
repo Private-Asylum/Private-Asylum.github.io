@@ -14,7 +14,7 @@ path = "site.rs"
 
 [dependencies]
 dioxus.workspace = true
-pvas-web.workspace = true
+pvas-web-shared.workspace = true
 
 [lints]
 workspace = true

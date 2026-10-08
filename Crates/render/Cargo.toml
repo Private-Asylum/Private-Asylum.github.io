@@ -14,8 +14,7 @@ path = "render.rs"
 
 [dependencies]
 pvas-site.workspace = true
-pvas-web.workspace = true
-tiny_http.workspace = true
+pvas-web-shared.workspace = true
 
 [lints]
 workspace = true

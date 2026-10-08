@@ -1,6 +1,7 @@
 /* Private Asylum's Yeti theme: token values only, loaded after yeti.css.
-   Every value Yeti offers is listed, with its default, in
-   vendor/yeti/starter/theme.css; this file sets only the ones that differ. */
+   Every value Yeti offers is listed, with its default, in pvas-web-shared at
+   Crates/assets/vendor/yeti/starter/theme.css; this file sets only the ones
+   that differ. */
 
 /* Repeats Yeti's layer order, so element rules land in the right place even
    if this file loads before yeti.css. */
